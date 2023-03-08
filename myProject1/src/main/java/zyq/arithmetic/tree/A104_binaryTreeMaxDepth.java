@@ -29,6 +29,11 @@ import java.util.*;
  * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
  */
 public class A104_binaryTreeMaxDepth {
+    /**
+     * 前序遍历，第一时间想到的，通过遍历和map来存储每个节点的值。
+     * @param root
+     * @return
+     */
     public static int maxDepth(TreeNode root) {
         //新增一个map，key存二叉树，value存度。
         int maxDepth = 0;
@@ -91,6 +96,77 @@ public class A104_binaryTreeMaxDepth {
 
     }
 
+    /**
+     * dfs , 一个节点 left和right的时候，它的深度一定+1，按照这个规律，就可以直接遍历
+     * 遍历一个节点的时候，把这个节点的值+1传给下一个节点
+     * 这种方法实则是和maxDepth1的递归方法没什么区别，都是深度优先，递归回溯
+     * @param root
+     *
+     dfs
+     执行用时：0 ms, 在所有 Java 提交中击败了100.00%的用户
+     内存消耗：41 MB, 在所有 Java 提交中击败了81.20%的用户
+     通过测试用例：39 / 39
+
+     */
+    static int  maxDepth = 0;
+    public static int maxDepth2(TreeNode root){
+        if(root == null){
+            return maxDepth;
+        }
+        dfs(root, maxDepth);
+
+        return maxDepth;
+    }
+
+    public static void dfs(TreeNode node, int depth){
+        if(node == null){
+            return ;
+        }
+        dfs(node.left, depth + 1);
+        dfs(node.right, depth + 1);
+        maxDepth = Math.max(maxDepth,depth+1);
+    }
+
+    /**
+     * bfs 广度优先，对树的宽度进行遍历
+     * 看了下概念，尝试着写出来
+     * @param root
+     *
+     执行用时：3 ms, 在所有 Java 提交中击败了0.70%的用户
+     内存消耗：41.1 MB, 在所有 Java 提交中击败了64.61%的用户
+     通过测试用例：39 / 39
+     */
+    public static int bfs(TreeNode root){
+        int maxDepth = 0;
+        if(root == null) {
+            return maxDepth;
+        }
+        Deque<TreeNode> inQueue = new LinkedList<>();
+        //1.先把初始的根节点加入到 inQueue
+        inQueue.push(root);
+        //2.新建一个newQueue，用来判断不同层数
+        Deque<TreeNode> newQueue = new LinkedList<>();
+        while (!inQueue.isEmpty()){
+            //3.开始对inQueue进行操作，拿出一个节点，就对该节点左右子节点入栈操作,
+            TreeNode node = inQueue.removeLast();
+            if(node.left != null){
+                newQueue.push(node.left);
+            }
+            if(node.right != null){
+                newQueue.push(node.right);
+            }
+            //4.检测inQueue是否为空,如果为空，就把inQueue的值转移到newQueue
+            if(inQueue.isEmpty()){
+               while (!newQueue.isEmpty()){
+                   inQueue.push(newQueue.removeLast());
+               }
+               //5.inQueue每清空一次，就是消耗掉了一层
+               ++maxDepth;
+            }
+        }
+        return maxDepth;
+    }
+
 
     public static void main(String[] args) {
         /**
@@ -109,7 +185,8 @@ public class A104_binaryTreeMaxDepth {
         treeNode.right.right = new TreeNode(7);
         treeNode.left.left.left = new TreeNode(10);
         treeNode.left.left.right = new TreeNode(8);
-        int i = maxDepth1(treeNode);
+
+        int i = bfs(treeNode);
         System.out.println(i);
     }
 
