@@ -13,11 +13,7 @@
         <module>myProject1</module>
         <module>MyProject_Test</module>
         <module>technology_all</module>
-        <module>technology_all</module>
-        <module>techonology_all</module>
-        <module>technology_all</module>
-        <module>technology_all1</module>
-        <module>technology_all</module>
+        <module>A_Leetcode</module>
     </modules>
 
     <properties>
