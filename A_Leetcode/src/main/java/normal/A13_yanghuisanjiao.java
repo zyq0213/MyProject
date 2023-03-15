@@ -8,7 +8,7 @@ import java.util.List;
 /**
  * @author yanqing.zou
  * @date 2023-01-09 15:34
- * Description
+ * Description 杨辉三角
  * 示例 1:
  *
  * 输入: rowIndex = 3
