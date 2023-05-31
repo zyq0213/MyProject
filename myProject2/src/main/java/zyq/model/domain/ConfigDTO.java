@@ -1,4 +1,4 @@
-package zyq.model;
+package zyq.model.domain;
 
 import lombok.Data;
 

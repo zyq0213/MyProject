@@ -1,6 +1,5 @@
 package zyq.controller;
 
-import com.alibaba.fastjson.JSONObject;
 import com.google.gson.Gson;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -14,12 +13,11 @@ import org.springframework.core.io.UrlResource;
 import org.springframework.web.bind.annotation.*;
 import zyq.annotation.FileParam;
 import zyq.annotation.FileValid;
-import zyq.model.ConfigDTO;
+import zyq.model.domain.ConfigDTO;
 import zyq.model.param.FileImportParam;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.MalformedURLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
